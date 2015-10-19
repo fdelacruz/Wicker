@@ -1,0 +1,26 @@
+{
+  "name": "wicker",
+  "version": "1.0.0",
+  "description": "A live collaborative wiki built on React.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fdelacruz/Wicker.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Francisco De La Cruz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fdelacruz/Wicker/issues"
+  },
+  "homepage": "https://github.com/fdelacruz/Wicker#readme",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "express": "^4.13.3"
+  }
+}
