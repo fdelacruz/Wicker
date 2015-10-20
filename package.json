@@ -4,7 +4,8 @@
   "description": "A live collaborative wiki built on React.js",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:js": "browserify ./src/app.js -t [ babelify --optional es7.classProperties ] --outfile public/all.js",
+    "build": "watch 'npm run build:js' ./src"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,10 @@
     "express": "^4.13.3",
     "express-session": "^1.11.3",
     "firebase": "^2.3.1"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.2.0",
+    "watch": "^0.16.0"
   }
 }
