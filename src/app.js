@@ -7,6 +7,7 @@ import App from './components/App';
 const {Route} = Router; // ES6 Destructuring
 
 var routes = <Route handler={App}>
+	<Route name='page' path='/page/:id' handler={App} />
 </Route>;
 
 Router.run(routes, Router.HistoryLocation, Root => // ES6 Arrow Function
