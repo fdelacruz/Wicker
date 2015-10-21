@@ -18,6 +18,7 @@ export default class Section extends React.Component {
 	}
 
 	getState = props => ({
+		locked: props.user && props.section.editor && props.user.username !== props.section.editor,
 		editing: props.user && props.user.username === props.section.editor,
 		content: props.section.content,
 		html: props.section.content ? markdown.toHTML(props.section.content) : ''
@@ -36,7 +37,7 @@ export default class Section extends React.Component {
 		let classes = ['row', 'section'];
 
 		if (this.state.editing) classes.push('editing');
-		if (this.props.user) classes.push('editable');
+		if (this.props.user) classes.push( this.state.locked ? 'locked' : 'editable');
 
 		return <section onClick={this.startEditing} className={ classes.join(' ')}>
 			{content}
@@ -55,7 +56,7 @@ export default class Section extends React.Component {
 	}
 
 	startEditing = evt => {
-		if (!this.props.user || this.state.editing) return;
+		if (!this.props.user || this.state.editing || this.state.locked) return;
 
 		this.setState({ editing: true });
 		API.pages.child(this.props.path).update({
