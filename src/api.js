@@ -1,5 +1,3 @@
-/* jshint esnext: true */
-
 import Firebase from 'firebase';
 
 const post = (url, body) => fetch(url, {

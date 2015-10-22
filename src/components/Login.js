@@ -1,5 +1,3 @@
-/* jshint esnext: true */
-
 import React from 'react';
 import * as API from '../api';
 
