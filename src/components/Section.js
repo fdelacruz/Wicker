@@ -6,8 +6,9 @@ import {markdown} from 'markdown';
 
 export default class Section extends React.Component {
 
-	constructor (props) {
-		super(props);
+	constructor (props, context) {
+		super(props, context);
+		this.context = context;
 		this.state = this.getState(props);
 	}
 
@@ -56,6 +57,15 @@ export default class Section extends React.Component {
 	}
 
 	startEditing = evt => {
+		if (evt.target.tagName === 'A') {
+			var href = evt.target.getAttribute('href');
+			if (href.indexOf('/page/') > -1) {
+				this.context.router.transitionTo(href);
+				return evt.preventDefault();
+			}
+			return;
+		}
+
 		if (!this.props.user || this.state.editing || this.state.locked) return;
 
 		this.setState({ editing: true });
@@ -64,3 +74,7 @@ export default class Section extends React.Component {
 		});
 	}
 }
+
+Section.contextTypes = {
+	router: React.PropTypes.func.isRequired
+};
