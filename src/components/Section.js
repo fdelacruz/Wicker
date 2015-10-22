@@ -25,6 +25,10 @@ export default class Section extends React.Component {
 		});
 
 	}
+	
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.editing) React.findDOMNode(this.refs.editor).focus();
+	}
 
 	getState = props => ({
 		locked: props.user && props.section.editor && props.user.username !== props.section.editor,
@@ -37,7 +41,7 @@ export default class Section extends React.Component {
 		let content;
 
 		if (this.state.editing) {
-			content = <textarea className='twelve columns' defaultValue={this.state.content}
+			content = <textarea ref='editor' className='twelve columns' defaultValue={this.state.content}
 					onChange={this.updateContent} onBlur={this.save} />;
 		} else {
 			content = <span dangerouslySetInnerHTML={ { __html: this.state.html } } />;	
@@ -67,7 +71,7 @@ export default class Section extends React.Component {
 	startEditing = evt => {
 		if (evt.target.tagName === 'A') {
 			var href = evt.target.getAttribute('href');
-			if (href.indexOf('/page/') > -1) {
+			if (href.indexOf('/page/') === 0) {
 				this.context.router.transitionTo(href);
 				return evt.preventDefault();
 			}
